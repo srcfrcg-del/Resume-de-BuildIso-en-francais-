@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildIso - Hub d'Apprentissage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide-react/0.263.1/lucide-react.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 1);
+        }
+        .flashcard-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            backface-visibility: hidden;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white py-12 px-6 text-center shadow-lg">
+        <h1 class="text-4xl font-bold mb-4">Écosystème BuildIso</h1>
+        <p class="text-slate-400 max-w-2xl mx-auto italic">Guide complet sur l'infrastructure de génération d'images ISO pour le développement de systèmes d'exploitation (OSDev).</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6 space-y-12">
+
+        <!-- Section Audio -->
+        <section class="glass-card p-8 rounded-3xl shadow-sm border border-blue-100">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="p-3 bg-blue-600 rounded-2xl text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold">Résumé Audio Dynamique</h2>
+                    <p class="text-slate-500">Écoutez une synthèse de l'analyse générée par IA.</p>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <button id="tts-btn" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                    <span id="btn-text">Générer et Lire l'audio</span>
+                </button>
+                <div id="audio-status" class="text-sm text-slate-400 italic">Prêt à l'écoute</div>
+                <audio id="audio-player" controls class="hidden w-full max-w-md"></audio>
+            </div>
+        </section>
+
+        <!-- Infographie Section -->
+        <section>
+            <h2 class="text-3xl font-bold mb-8 text-center">Architecture de l'Écosystème</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl text-center hover:translate-y-[-5px] transition-transform">
+                    <div class="text-4xl mb-4">⚙️</div>
+                    <h3 class="font-bold text-xl mb-2">BuildIso Core</h3>
+                    <p class="text-sm text-slate-600">Générateur ISO minimaliste (CLI) pour Windows. Support BIOS et UEFI.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center hover:translate-y-[-5px] transition-transform">
+                    <div class="text-4xl mb-4">🌐</div>
+                    <h3 class="font-bold text-xl mb-2">Sous-domaines</h3>
+                    <p class="text-sm text-slate-600">docs, api, community et lcrawl. Une infrastructure cloud complète.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center hover:translate-y-[-5px] transition-transform">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="font-bold text-xl mb-2">Version Pro</h3>
+                    <p class="text-sm text-slate-600">Compilateur assembleur intégré et gestion de Workspace (extraction/repaquetage).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section class="bg-slate-100 p-10 rounded-3xl">
+            <h2 class="text-2xl font-bold mb-6 text-center">Flashcards de Révision</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="flashcard h-48 cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner relative w-full h-full shadow-md rounded-xl">
+                        <div class="flashcard-front absolute inset-0 bg-white flex items-center justify-center p-6 text-center font-semibold rounded-xl border border-slate-200">
+                            Quel est l'acronyme pour le développement de systèmes d'exploitation ?
+                        </div>
+                        <div class="flashcard-back absolute inset-0 bg-blue-600 text-white flex items-center justify-center p-6 text-center rounded-xl font-medium">
+                            OSDev (Operating System Development)
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="flashcard h-48 cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner relative w-full h-full shadow-md rounded-xl">
+                        <div class="flashcard-front absolute inset-0 bg-white flex items-center justify-center p-6 text-center font-semibold rounded-xl border border-slate-200">
+                            Quelle spécification permet l'amorçage à partir d'un CD/ISO ?
+                        </div>
+                        <div class="flashcard-back absolute inset-0 bg-blue-600 text-white flex items-center justify-center p-6 text-center rounded-xl font-medium">
+                            El Torito
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="flashcard h-48 cursor-pointer group" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner relative w-full h-full shadow-md rounded-xl">
+                        <div class="flashcard-front absolute inset-0 bg-white flex items-center justify-center p-6 text-center font-semibold rounded-xl border border-slate-200">
+                            Quel outil populaire est lié historiquement à BuildIso ?
+                        </div>
+                        <div class="flashcard-back absolute inset-0 bg-blue-600 text-white flex items-center justify-center p-6 text-center rounded-xl font-medium">
+                            Rufus (présent dans son dépôt source)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="glass-card p-10 rounded-3xl shadow-lg max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Quiz de validation
+            </h2>
+            <div id="quiz-container" class="space-y-8">
+                <div>
+                    <p class="font-bold mb-4">1. Quel est le rôle principal du logiciel BuildIso ?</p>
+                    <div class="space-y-2">
+                        <button class="quiz-opt w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" data-correct="true">Transformer des binaires en images ISO amorçables</button>
+                        <button class="quiz-opt w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" data-correct="false">Héberger des serveurs web pour développeurs</button>
+                        <button class="quiz-opt w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" data-correct="false">Compresser des fichiers ZIP volumineux</button>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-bold mb-4">2. Quelle fonctionnalité est exclusive à BuildIso Pro ?</p>
+                    <div class="space-y-2">
+                        <button class="quiz-opt w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" data-correct="false">Support de l'amorçage BIOS Legacy</button>
+                        <button class="quiz-opt w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" data-correct="true">Compilateur assembleur intégré et Workspace beta</button>
+                        <button class="quiz-opt w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors" data-correct="false">Interface graphique en 3D</button>
+                    </div>
+                </div>
+            </div>
+            <div id="quiz-result" class="mt-8 p-4 rounded-xl hidden text-center font-bold"></div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 text-center text-slate-400 text-sm">
+        <p>&copy; 2026 BuildIso Hub - Plateforme d'analyse technique</p>
+    </footer>
+
+    <script>
+        const apiKey = ""; // La clé sera injectée par l'environnement
+        const ttsBtn = document.getElementById('tts-btn');
+        const audioPlayer = document.getElementById('audio-player');
+        const audioStatus = document.getElementById('audio-status');
+        const btnText = document.getElementById('btn-text');
+
+        // --- FONCTION TTS ---
+        async function generateAudio() {
+            const summaryText = "BuildIso est un écosystème spécialisé dans la création d'images ISO pour le développement de systèmes d'exploitation. Il propose un outil léger pour Windows, une version Pro avec compilateur intégré, et une infrastructure complète via des sous-domaines comme API, Docs et Community. Son lien avec le projet Rufus garantit une grande fiabilité technique pour les passionnés d'OSDev.";
+            
+            audioStatus.textContent = "Génération de la voix...";
+            btnText.textContent = "Chargement...";
+            ttsBtn.disabled = true;
+
+            const payload = {
+                contents: [{ parts: [{ text: `D'un ton professionnel et clair, lis ce résumé : ${summaryText}` }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Kore" }
+                        }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            try {
+                let response;
+                let retries = 0;
+                while (retries < 5) {
+                    response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) break;
+                    const delay = Math.pow(2, retries) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    retries++;
+                }
+
+                if (!response.ok) throw new Error("Erreur après tentatives");
+
+                const result = await response.json();
+                const audioData = result.candidates[0].content.parts[0].inlineData.data;
+                
+                // Conversion PCM to WAV (Minimal header approach)
+                const wavBlob = pcmToWav(audioData, 24000); // Kore is usually 24kHz
+                const audioUrl = URL.createObjectURL(wavBlob);
+                
+                audioPlayer.src = audioUrl;
+                audioPlayer.classList.remove('hidden');
+                audioPlayer.play();
+                
+                audioStatus.textContent = "Lecture en cours...";
+                btnText.textContent = "Re-générer l'audio";
+            } catch (error) {
+                audioStatus.textContent = "Erreur de génération.";
+                console.error(error);
+            } finally {
+                ttsBtn.disabled = false;
+            }
+        }
+
+        // Helper: Base64 to WAV
+        function pcmToWav(base64Data, sampleRate) {
+            const binaryString = window.atob(base64Data);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            
+            const buffer = new ArrayBuffer(44 + bytes.length);
+            const view = new DataView(buffer);
+            
+            const writeString = (offset, string) => {
+                for (let i = 0; i < string.length; i++) {
+                    view.setUint8(offset + i, string.charCodeAt(i));
+                }
+            };
+            
+            writeString(0, 'RIFF');
+            view.setUint32(4, 32 + bytes.length, true);
+            writeString(8, 'WAVE');
+            writeString(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true); // PCM
+            view.setUint16(22, 1, true); // Mono
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+            writeString(36, 'data');
+            view.setUint32(40, bytes.length, true);
+            
+            const pcmData = new Uint8Array(buffer, 44);
+            pcmData.set(bytes);
+            
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+
+        ttsBtn.addEventListener('click', generateAudio);
+
+        // --- LOGIQUE QUIZ ---
+        let score = 0;
+        const totalQuestions = 2;
+        const options = document.querySelectorAll('.quiz-opt');
+        const resultDiv = document.getElementById('quiz-result');
+
+        options.forEach(opt => {
+            opt.addEventListener('click', () => {
+                const parent = opt.parentElement;
+                const isCorrect = opt.getAttribute('data-correct') === 'true';
+                
+                // Empêcher de re-cliquer sur la même question
+                if (parent.querySelector('.selected')) return;
+                
+                opt.classList.add('selected');
+                
+                if (isCorrect) {
+                    opt.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+                    score++;
+                } else {
+                    opt.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+                    // Montrer la bonne réponse
+                    parent.querySelector('[data-correct="true"]').classList.add('bg-green-50', 'border-green-300');
+                }
+
+                checkCompletion();
+            });
+        });
+
+        function checkCompletion() {
+            const answered = document.querySelectorAll('.selected').length;
+            if (answered === totalQuestions) {
+                resultDiv.classList.remove('hidden');
+                resultDiv.textContent = `Score final : ${score} / ${totalQuestions}`;
+                resultDiv.className = `mt-8 p-4 rounded-xl text-center font-bold ${score === totalQuestions ? 'bg-green-600 text-white' : 'bg-orange-500 text-white'}`;
+            }
+        }
+    </script>
+</body>
+</html>
